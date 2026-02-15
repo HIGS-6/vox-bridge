@@ -33,12 +33,11 @@ def init_worker():
 
     print("[STT] Starting Whisper...")
 
-    # model = WhisperModel(model_path, device="cpu", compute_type="int8")
     _whisper = WhisperModel(
         "small.en",
         device="cpu",
         compute_type="int8",
-        local_files_only=True,
+        local_files_only=False,
     )
 
 
@@ -52,6 +51,8 @@ def run_stt():
         raise Exception("STT model not initialized properly")
 
     # state.stt_worker_ready = True
+
+    print("[STT] Whisper Ready.")
 
     while True:
         audio_path = state.audio_queue.get()
