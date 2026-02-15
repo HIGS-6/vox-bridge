@@ -1,7 +1,6 @@
 import numpy as np
 
 import state
-from utils import resource_path
 
 _whisper = None
 
@@ -34,10 +33,9 @@ def init_worker():
 
     print("[STT] Starting Whisper...")
 
-    model_path = resource_path("assets/models/small.en")
     # model = WhisperModel(model_path, device="cpu", compute_type="int8")
     _whisper = WhisperModel(
-        model_path,
+        "small.en",
         device="cpu",
         compute_type="int8",
         local_files_only=True,
