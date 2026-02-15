@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_data_files
 
-datas = [('webclient', 'webclient'), ('assets/models', 'assets/models')]
+datas = [('webclient', 'webclient')]
 datas += collect_data_files('faster_whisper')
 
 
