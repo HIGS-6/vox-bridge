@@ -1,6 +1,7 @@
 import numpy as np
 
 import state
+from utils import resource_path
 
 _whisper = None
 
@@ -23,11 +24,6 @@ def prepare_for_whisper(samples: np.ndarray, sample_rate: int) -> np.ndarray:
     # Clip por si acaso alguien hizo algo creativo
     np.clip(x, -1.0, 1.0, out=x)
 
-    # Resamplear si no es 16k
-    # if sample_rate != 16000:
-    #     import librosa
-    #     x = librosa.resample(x, orig_sr=sample_rate, target_sr=16000)
-
     return x
 
 
@@ -37,7 +33,15 @@ def init_worker():
     global _whisper
 
     print("[STT] Starting Whisper...")
-    _whisper = WhisperModel("small", device="cpu", compute_type="int8")
+
+    model_path = resource_path("assets/models/small.en")
+    # model = WhisperModel(model_path, device="cpu", compute_type="int8")
+    _whisper = WhisperModel(
+        model_path,
+        device="cpu",
+        compute_type="int8",
+        local_files_only=True,
+    )
 
 
 def run_stt():
