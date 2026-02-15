@@ -23,7 +23,7 @@ jobs:
 
       - name: Build app
         run: |
-          pyinstaller main.py --noconfirm --onedir --add-data "webclient:webclient" --add-data "assets/models:assets/models" --collect-data faster_whisper
+          pyinstaller main.py --noconfirm --onedir --add-data "webclient:webclient" --collect-data faster_whisper
 
       - name: Install Inno Setup
         run: choco install innosetup -y
